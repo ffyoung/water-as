@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfs.quota.dao.QuotaDao" >
+    <resultMap id="BasetMap" type="com.bfs.quota.po.Quota" >
+        <result property="id" column="id" jdbcType="BIGINT" />
+        <result property="domesticWater" column="domestic_water" jdbcType="DOUBLE" />
+        <result property="agriculturalWater" column="agricultural_water" jdbcType="DOUBLE" />
+        <result property="ecologicalWater" column="ecological_water" jdbcType="DOUBLE" />
+        <result property="industrialWater" column="industrial_water" jdbcType="DOUBLE" />
+    </resultMap>
+
+    <sql id="Mycolumn">
+        id,domestic_water,agricultural_water,ecological_water,industrial_water
+    </sql>
+
+    <select id="findQuota" resultMap="BasetMap" >
+        select <include refid="Mycolumn" /> from t_quota where id = 1
+    </select>
+
+
+    <update id="updateQuota" statementType="STATEMENT">
+        update t_quota set ${mkey} = ${mvalue} where id = 1
+    </update>
+
+</mapper>

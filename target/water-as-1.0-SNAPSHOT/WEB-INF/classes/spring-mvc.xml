@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--注解驱动开启-->
+    <mvc:annotation-driven />
+
+    <!--扫描带注解的bean实现自动注入-->
+    <context:component-scan base-package="com.*.**.controller" />
+
+    <!--静态资源文件-->
+    <mvc:resources location="/frame/" mapping="/frame/**" />
+    <mvc:resources location="/js/" mapping="/js/**" />
+
+    <!--
+                                    视图解析器  Start
+        1.视图解析器当web容器加载的时候 根据order先后进行，最高级为1顺序排列
+        2.当DispatcherServlet进行查找的时候，先查找后缀为.ftl的，随后查找.jsp的
+    -->
+    <!--JSP 视图解析器-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix"  value="/"  />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 文件大小最大值 -->
+        <property name="maxUploadSize" value="10485760000"/>
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+</beans>

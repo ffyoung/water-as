@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bfs.info.dao.HeadInfoDao" >
+    <resultMap id="BasetMap" type="com.bfs.info.po.HeadInfo" >
+        <result property="id" column="id" jdbcType="BIGINT" />
+        <result property="hzName" column="hz_name" jdbcType="VARCHAR" />
+        <result property="tp" column="total_people" jdbcType="VARCHAR" />
+        <result property="land" column="land" jdbcType="VARCHAR" />
+        <result property="waterEco" column="water_eco" jdbcType="VARCHAR" />
+        <result property="vid" column="village_id" jdbcType="INTEGER" />
+        <result property="wid" column="well_id" jdbcType="INTEGER" />
+
+    </resultMap>
+
+    <sql id="Mycolumn">
+        id,hz_name,total_people,land,water_eco,village_id,well_id
+    </sql>
+
+    <select id="findById" resultMap="BasetMap" parameterType="java.lang.Long" >
+        select <include refid="Mycolumn" /> from t_head where id = #{id,jdbcType=BIGINT}
+    </select>
+
+</mapper>
